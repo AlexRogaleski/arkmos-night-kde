@@ -1,0 +1,18 @@
+{
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "AlexRogaleski"
+            }
+        ],
+        "Category": "",
+        "Description": "Dark global theme inspired by Tokyo Night, with the Bibata Modern Ice cursor",
+        "Description[pt_BR]": "Tema global escuro inspirado no Tokyo Night, com o cursor Bibata Modern Ice",
+        "Id": "com.github.alexrogaleski.arkmosnight",
+        "License": "MIT",
+        "Name": "Arkmos Night",
+        "Version": "1.0.0",
+        "Website": "https://github.com/AlexRogaleski/arkmos-night-kde"
+    }
+}

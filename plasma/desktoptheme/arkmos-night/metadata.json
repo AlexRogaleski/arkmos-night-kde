@@ -1,0 +1,19 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "AlexRogaleski"
+            }
+        ],
+        "Category": "",
+        "Description": "Dark Plasma style inspired by Tokyo Night, built on Breeze",
+        "Description[pt_BR]": "Estilo escuro do Plasma inspirado no Tokyo Night, feito sobre o Breeze",
+        "EnabledByDefault": true,
+        "Id": "arkmos-night",
+        "License": "MIT",
+        "Name": "Arkmos Night",
+        "Version": "1.0.0",
+        "Website": "https://github.com/AlexRogaleski/arkmos-night-kde"
+    },
+    "X-Plasma-API": "5.0"
+}
