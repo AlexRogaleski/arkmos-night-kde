@@ -62,10 +62,11 @@ P = {
 
 # Bordas e separadores do estilo Breeze não têm cor própria no esquema: o
 # Breeze mistura o texto no fundo nesta proporção. O padrão do KDE é 0.2.
-# Com 0 as linhas somem e as áreas se separam só pelos dois tons de fundo
-# (janela #1a1b26, listas #16161e). Os campos de texto também perdem a borda
-# e ficam marcados só pelo fundo mais escuro.
-FRAME_CONTRAST = 0
+# Com 0.03 a linha fica em #1f202c, quase a cor do fundo da janela (#1a1b26):
+# as áreas se separam mais pelos dois tons de fundo (janela #1a1b26, listas
+# #16161e) do que pela linha, mas os campos de texto ainda mantêm a borda.
+# Com 0 as linhas somem de vez.
+FRAME_CONTRAST = 0.03
 
 
 def rgb(h):
