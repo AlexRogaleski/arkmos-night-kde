@@ -60,6 +60,12 @@ P = {
 }
 
 
+# Bordas e separadores do estilo Breeze não têm cor própria no esquema: o
+# Breeze mistura o texto no fundo nesta proporção. O padrão do KDE é 0.2;
+# 0.1 deixa as linhas entre os painéis mais discretas.
+FRAME_CONTRAST = 0.1
+
+
 def rgb(h):
     h = h.lstrip("#")
     return ",".join(str(int(h[i:i + 2], 16)) for i in (0, 2, 4))
@@ -164,6 +170,7 @@ shadeSortColumn=true
 
 [KDE]
 contrast=4
+frameContrast={FRAME_CONTRAST}
 
 [WM]
 activeBackground={rgb(P['bg_dark'])}
@@ -390,9 +397,11 @@ def render_previews():
     png = ROOT / "docs/preview.png"
     previews = ROOT / "plasma/look-and-feel" / LNF_ID / "contents/previews"
     previews.mkdir(parents=True, exist_ok=True)
-    subprocess.run([magick, "-background", "none", str(svg), str(png)], check=True)
-    subprocess.run([magick, str(png), "-quality", "90", str(previews / "fullscreenpreview.jpg")], check=True)
-    subprocess.run([magick, str(png), "-resize", "640x360", str(previews / "preview.png")], check=True)
+    # -strip tira a data de criação que o ImageMagick grava no arquivo: sem
+    # isso, toda execução muda os PNGs no git mesmo com o desenho igual.
+    subprocess.run([magick, "-background", "none", str(svg), "-strip", str(png)], check=True)
+    subprocess.run([magick, str(png), "-strip", "-quality", "90", str(previews / "fullscreenpreview.jpg")], check=True)
+    subprocess.run([magick, str(png), "-strip", "-resize", "640x360", str(previews / "preview.png")], check=True)
     for p in (png, previews / "fullscreenpreview.jpg", previews / "preview.png"):
         print("  ", p.relative_to(ROOT))
 

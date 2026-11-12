@@ -73,6 +73,10 @@ python3 tools/build.py
 
 O script gera o esquema de cores, as cores do Plasma, o esquema do Konsole e as prévias. As prévias precisam do ImageMagick (`magick`).
 
+### Linhas entre os painéis
+
+As bordas e os separadores das janelas (entre a lateral e a lista do Dolphin, por exemplo) não têm cor própria no esquema: o Breeze mistura um pouco da cor do texto no fundo. A proporção fica em `FRAME_CONTRAST`, no `tools/build.py`. O tema usa `0.1`, metade do padrão do KDE, para as linhas ficarem discretas. Use `0.2` para o padrão ou um valor maior para linhas mais marcadas. Apps que já estavam abertos podem precisar ser reabertos para mostrar a mudança.
+
 ## Paleta
 
 | Uso | Cor |
