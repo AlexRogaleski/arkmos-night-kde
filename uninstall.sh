@@ -32,4 +32,5 @@ rm -rf "$DATA/plasma/look-and-feel/$LNF_ID" "$DATA/plasma/desktoptheme/$PLASMA_I
 rm -f "$DATA/color-schemes/ArkmosNight.colors" "$DATA/konsole/ArkmosNight.colorscheme"
 
 echo
-echo "Pronto. O cursor continua em $DATA/icons/Bibata-Modern-Ice; apague essa pasta se não for usar."
+echo "Pronto. O cursor continua instalado. Se não for usar, apague a pasta"
+echo "$DATA/icons/Bibata-Modern-Ice e o link $HOME/.icons/Bibata-Modern-Ice."

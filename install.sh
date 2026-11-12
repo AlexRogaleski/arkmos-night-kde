@@ -75,6 +75,15 @@ if (( cursor )); then
         test -e "$DATA/icons/$CURSOR/cursors/left_ptr"
         echo "    $(find "$DATA/icons/$CURSOR/cursors" -mindepth 1 | wc -l) cursores instalados"
     fi
+
+    # A pasta fica em ~/.local/share/icons, que é onde os apps Flatpak procuram.
+    # A tela de cursores das Configurações do sistema (e o
+    # plasma-apply-cursortheme) não procura lá, só em ~/.icons: sem este link o
+    # cursor funciona, mas não aparece na lista para escolher o tamanho.
+    if [[ -d "$DATA/icons/$CURSOR" && ! -e "$HOME/.icons/$CURSOR" ]]; then
+        mkdir -p "$HOME/.icons"
+        ln -s "$DATA/icons/$CURSOR" "$HOME/.icons/$CURSOR"
+    fi
 fi
 
 if (( apply )); then

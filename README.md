@@ -47,7 +47,9 @@ O Konsole não segue o tema global. Para usar as cores, vá em **Configurações
 
 ### Tamanho do cursor
 
-O Bibata tem os tamanhos 16, 20, 22, 24, 28, 32, 40, 48 e acima. Com outro tamanho, o KDE usa o mais próximo, e o cursor pode ficar um pouco menos nítido.
+O Bibata tem os tamanhos 16, 20, 22, 24, 28, 32, 40, 48 e acima. Com outro tamanho, o KDE usa o mais próximo, e o cursor pode ficar um pouco menos nítido. Troque em **Configurações do sistema → Cores e temas → Cursores**.
+
+O cursor fica em `~/.local/share/icons`, onde os apps Flatpak procuram, e o `install.sh` cria um link em `~/.icons`, porque a tela de cursores das Configurações só procura lá. Sem o link, o cursor funciona, mas não aparece na lista.
 
 ## Remoção
 
@@ -55,7 +57,7 @@ O Bibata tem os tamanhos 16, 20, 22, 24, 28, 32, 40, 48 e acima. Com outro taman
 ./uninstall.sh
 ```
 
-O que estiver em uso volta para o Breeze Dark antes de ser apagado. O cursor fica instalado, porque outros temas podem usar; para tirar, apague `~/.local/share/icons/Bibata-Modern-Ice`.
+O que estiver em uso volta para o Breeze Dark antes de ser apagado. O cursor fica instalado, porque outros temas podem usar; para tirar, apague `~/.local/share/icons/Bibata-Modern-Ice` e o link `~/.icons/Bibata-Modern-Ice`.
 
 ## Mudando as cores
 
