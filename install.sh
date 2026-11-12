@@ -2,12 +2,12 @@
 #
 # Instala o Arkmos Night para o usuário atual, em ~/.local/share. Não usa sudo.
 #
-#   ./install.sh               instala o tema e o cursor
+#   ./install.sh               instala o tema e os cursores
 #   ./install.sh --apply       instala e já aplica o tema global
-#   ./install.sh --no-cursor   não baixa o cursor Bibata Modern Ice
+#   ./install.sh --no-cursor   não baixa os cursores Bibata
 #
-# O cursor vem do release oficial do Bibata, com versão e SHA256 fixados (os
-# mesmos do Arkmos): se o arquivo servido mudar, a instalação para.
+# Os cursores vêm do release oficial do Bibata, com versão e SHA256 fixados:
+# se o arquivo servido mudar, a instalação para.
 
 set -euo pipefail
 
@@ -17,9 +17,15 @@ DATA="${XDG_DATA_HOME:-$HOME/.local/share}"
 LNF_ID="com.github.alexrogaleski.arkmosnight"
 PLASMA_ID="arkmos-night"
 
-CURSOR="Bibata-Modern-Ice"
+# O release do Bibata não publica checksum. O do Ice é o mesmo fixado no Arkmos
+# (calculado em 2026-09-24); o do Classic foi calculado no download de
+# 2026-11-11. O Ice é o cursor do tema global; o Classic fica disponível para
+# escolher em Configurações do sistema → Cursores.
 BIBATA_VERSION="2.0.7"
-BIBATA_SHA256="a68cae60c4dc706350e194ebc91c5fe48bc7bc9d59e119555834a2a7ee5078ef"
+CURSORS=(
+    "Bibata-Modern-Ice      a68cae60c4dc706350e194ebc91c5fe48bc7bc9d59e119555834a2a7ee5078ef"  # branco
+    "Bibata-Modern-Classic  7d3495864e5bbef02f5e77de760b2905903b63c71495a78ef6306d19a3b556d8"  # preto
+)
 
 apply=0
 cursor=1
@@ -39,6 +45,40 @@ copy_dir() {
     cp -r "$1" "$2"
 }
 
+install_cursor() {
+    local name="$1" sha="$2" got
+    if [[ -f "$DATA/icons/$name/index.theme" || -f "/usr/share/icons/$name/index.theme" ]]; then
+        echo "==> Cursor $name já instalado"
+    else
+        echo "==> Cursor $name $BIBATA_VERSION"
+        curl -fsSL --retry 5 --retry-delay 10 --retry-all-errors --connect-timeout 20 \
+            -o "$work/$name.tar.xz" \
+            "https://github.com/ful1e5/Bibata_Cursor/releases/download/v${BIBATA_VERSION}/${name}.tar.xz"
+
+        got="$(sha256sum "$work/$name.tar.xz" | cut -d' ' -f1)"
+        if [[ "$got" != "$sha" ]]; then
+            echo "ERRO: checksum do cursor $name não confere." >&2
+            echo "  esperado: $sha" >&2
+            echo "  obtido:   $got" >&2
+            exit 1
+        fi
+
+        mkdir -p "$DATA/icons"
+        tar -xJf "$work/$name.tar.xz" -C "$DATA/icons" "$name/"
+        test -e "$DATA/icons/$name/cursors/left_ptr"
+        echo "    $(find "$DATA/icons/$name/cursors" -mindepth 1 | wc -l) cursores instalados"
+    fi
+
+    # A pasta fica em ~/.local/share/icons, que é onde os apps Flatpak procuram.
+    # A tela de cursores das Configurações do sistema (e o
+    # plasma-apply-cursortheme) não procura lá, só em ~/.icons: sem este link o
+    # cursor funciona, mas não aparece na lista para escolher.
+    if [[ -d "$DATA/icons/$name" && ! -e "$HOME/.icons/$name" ]]; then
+        mkdir -p "$HOME/.icons"
+        ln -s "$DATA/icons/$name" "$HOME/.icons/$name"
+    fi
+}
+
 echo "==> Esquema de cores"
 install -Dm644 "$REPO/color-schemes/ArkmosNight.colors" "$DATA/color-schemes/ArkmosNight.colors"
 
@@ -52,38 +92,12 @@ echo "==> Cores do Konsole"
 install -Dm644 "$REPO/konsole/ArkmosNight.colorscheme" "$DATA/konsole/ArkmosNight.colorscheme"
 
 if (( cursor )); then
-    if [[ -f "$DATA/icons/$CURSOR/index.theme" || -f "/usr/share/icons/$CURSOR/index.theme" ]]; then
-        echo "==> Cursor $CURSOR já instalado"
-    else
-        echo "==> Cursor $CURSOR $BIBATA_VERSION"
-        work="$(mktemp -d)"
-        trap 'rm -rf "$work"' EXIT
-        curl -fsSL --retry 5 --retry-delay 10 --retry-all-errors --connect-timeout 20 \
-            -o "$work/$CURSOR.tar.xz" \
-            "https://github.com/ful1e5/Bibata_Cursor/releases/download/v${BIBATA_VERSION}/${CURSOR}.tar.xz"
-
-        got="$(sha256sum "$work/$CURSOR.tar.xz" | cut -d' ' -f1)"
-        if [[ "$got" != "$BIBATA_SHA256" ]]; then
-            echo "ERRO: checksum do cursor não confere." >&2
-            echo "  esperado: $BIBATA_SHA256" >&2
-            echo "  obtido:   $got" >&2
-            exit 1
-        fi
-
-        mkdir -p "$DATA/icons"
-        tar -xJf "$work/$CURSOR.tar.xz" -C "$DATA/icons" "$CURSOR/"
-        test -e "$DATA/icons/$CURSOR/cursors/left_ptr"
-        echo "    $(find "$DATA/icons/$CURSOR/cursors" -mindepth 1 | wc -l) cursores instalados"
-    fi
-
-    # A pasta fica em ~/.local/share/icons, que é onde os apps Flatpak procuram.
-    # A tela de cursores das Configurações do sistema (e o
-    # plasma-apply-cursortheme) não procura lá, só em ~/.icons: sem este link o
-    # cursor funciona, mas não aparece na lista para escolher o tamanho.
-    if [[ -d "$DATA/icons/$CURSOR" && ! -e "$HOME/.icons/$CURSOR" ]]; then
-        mkdir -p "$HOME/.icons"
-        ln -s "$DATA/icons/$CURSOR" "$HOME/.icons/$CURSOR"
-    fi
+    work="$(mktemp -d)"
+    trap 'rm -rf "$work"' EXIT
+    for entry in "${CURSORS[@]}"; do
+        read -r name sha <<<"$entry"
+        install_cursor "$name" "$sha"
+    done
 fi
 
 if (( apply )); then

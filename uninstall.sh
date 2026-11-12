@@ -3,7 +3,7 @@
 # Remove o Arkmos Night de ~/.local/share. O que estiver em uso volta para o
 # Breeze Dark antes de ser apagado.
 #
-# O cursor Bibata Modern Ice fica instalado, porque outros temas podem usá-lo.
+# Os cursores Bibata ficam instalados, porque outros temas podem usá-los.
 
 set -euo pipefail
 
@@ -32,5 +32,6 @@ rm -rf "$DATA/plasma/look-and-feel/$LNF_ID" "$DATA/plasma/desktoptheme/$PLASMA_I
 rm -f "$DATA/color-schemes/ArkmosNight.colors" "$DATA/konsole/ArkmosNight.colorscheme"
 
 echo
-echo "Pronto. O cursor continua instalado. Se não for usar, apague a pasta"
-echo "$DATA/icons/Bibata-Modern-Ice e o link $HOME/.icons/Bibata-Modern-Ice."
+echo "Pronto. Os cursores continuam instalados. Se não for usar, apague as pastas"
+echo "Bibata-Modern-Ice e Bibata-Modern-Classic em $DATA/icons e os links"
+echo "com os mesmos nomes em $HOME/.icons."
