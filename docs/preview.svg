@@ -25,7 +25,7 @@
     <rect x="180" y="110" width="1100" height="720" rx="8" fill="#1a1b26"/>
   </g>
   <g clip-path="url(#w1)">
-    <rect x="180" y="110" width="1100" height="92" fill="#16161e"/>
+    <rect x="180" y="110" width="1100" height="92" fill="#1a1b26"/>
     <text x="730" y="135" font-size="15" fill="#c0caf5" text-anchor="middle">Arkmos Night</text>
     <g stroke="#c0caf5" stroke-width="2" stroke-linecap="round" fill="none">
       <path d="M1180 129 h12"/>
@@ -36,9 +36,9 @@
     <g stroke="#a9b1d6" stroke-width="2" stroke-linecap="round" fill="none">
       <path d="M210 175 l-8 -7 8 -7 M240 175 l8 -7 -8 -7"/>
     </g>
-    <rect x="280" y="155" width="600" height="30" rx="4" fill="#1a1b26" stroke="#292e42"/>
+    <rect x="280" y="155" width="600" height="30" rx="4" fill="#1a1b26"/>
     <text x="296" y="175" font-size="14" fill="#a9b1d6">Pessoal  ›  Projetos  ›  arkmos-night-kde</text>
-    <rect x="1080" y="155" width="180" height="30" rx="4" fill="#1a1b26" stroke="#292e42"/>
+    <rect x="1080" y="155" width="180" height="30" rx="4" fill="#1a1b26"/>
     <text x="1096" y="175" font-size="14" fill="#565f89">Pesquisar…</text>
 
     <!-- lateral -->
@@ -112,7 +112,7 @@
     <rect x="1010" y="400" width="760" height="480" rx="8" fill="#1a1b26"/>
   </g>
   <g clip-path="url(#w2)">
-    <rect x="1010" y="400" width="760" height="38" fill="#16161e"/>
+    <rect x="1010" y="400" width="760" height="38" fill="#1a1b26"/>
     <text x="1390" y="425" font-size="15" fill="#c0caf5" text-anchor="middle">Konsole</text>
     <g stroke="#c0caf5" stroke-width="2" stroke-linecap="round" fill="none">
       <path d="M1670 419 h12"/>
@@ -148,7 +148,7 @@
 
   <!-- painel flutuante -->
   <g filter="url(#shadow)">
-    <rect x="610" y="1004" width="700" height="52" rx="10" fill="#16161e" stroke="#292e42"/>
+    <rect x="610" y="1004" width="700" height="52" rx="10" fill="#1a1b26" stroke="#292e42"/>
   </g>
   <rect x="626" y="1014" width="32" height="32" rx="8" fill="#7aa2f7"/>
   <path d="M634 1038 l8 -16 8 16 M637 1032 h10" stroke="#16161e" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>

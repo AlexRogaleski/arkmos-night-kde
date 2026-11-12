@@ -61,9 +61,11 @@ P = {
 
 
 # Bordas e separadores do estilo Breeze não têm cor própria no esquema: o
-# Breeze mistura o texto no fundo nesta proporção. O padrão do KDE é 0.2;
-# 0.1 deixa as linhas entre os painéis mais discretas.
-FRAME_CONTRAST = 0.1
+# Breeze mistura o texto no fundo nesta proporção. O padrão do KDE é 0.2.
+# Com 0 as linhas somem e as áreas se separam só pelos dois tons de fundo
+# (janela #1a1b26, listas #16161e). Os campos de texto também perdem a borda
+# e ficam marcados só pelo fundo mais escuro.
+FRAME_CONTRAST = 0
 
 
 def rgb(h):
@@ -114,9 +116,13 @@ def color_scheme():
         # Botões um tom acima do fundo, para se destacarem da janela.
         "Colors:Button": group(P["bg_hl"], P["fg_gutter"]),
         "Colors:Complementary": group(P["bg_dark"], P["bg"]),
-        # Barra de título e barras de ferramentas.
-        "Colors:Header": group(P["bg_dark"], P["bg"]),
-        "Colors:Header][Inactive": group(P["bg_dark"], P["bg"], fg=P["fg_dark"], inactive=P["comment"]),
+        # Barra de título e barras de ferramentas: o mesmo fundo da janela.
+        # A barra de endereço do Dolphin e a lateral usam o fundo da janela;
+        # com o cabeçalho num tom diferente, o endereço vira uma faixa à parte.
+        # Para janelas em segundo plano o Plasma já usa as cores da janela,
+        # seja o que for que o esquema diga; aqui fica igual para não enganar.
+        "Colors:Header": group(P["bg"], P["bg_dark"]),
+        "Colors:Header][Inactive": group(P["bg"], P["bg_dark"], fg=P["fg_dark"], inactive=P["comment"]),
         # Seleção em azul claro com texto escuro.
         "Colors:Selection": {
             "BackgroundAlternate": P["blue0"],
@@ -173,10 +179,10 @@ contrast=4
 frameContrast={FRAME_CONTRAST}
 
 [WM]
-activeBackground={rgb(P['bg_dark'])}
+activeBackground={rgb(P['bg'])}
 activeBlend={rgb(P['fg'])}
 activeForeground={rgb(P['fg'])}
-inactiveBackground={rgb(P['bg_dark'])}
+inactiveBackground={rgb(P['bg'])}
 inactiveBlend={rgb(P['comment'])}
 inactiveForeground={rgb(P['comment'])}
 """)
@@ -259,7 +265,7 @@ PREVIEW = Template("""<svg xmlns="http://www.w3.org/2000/svg" width="1920" heigh
     <rect x="180" y="110" width="1100" height="720" rx="8" fill="${bg}"/>
   </g>
   <g clip-path="url(#w1)">
-    <rect x="180" y="110" width="1100" height="92" fill="${bg_dark}"/>
+    <rect x="180" y="110" width="1100" height="92" fill="${bg}"/>
     <text x="730" y="135" font-size="15" fill="${fg}" text-anchor="middle">Arkmos Night</text>
     <g stroke="${fg}" stroke-width="2" stroke-linecap="round" fill="none">
       <path d="M1180 129 h12"/>
@@ -270,9 +276,9 @@ PREVIEW = Template("""<svg xmlns="http://www.w3.org/2000/svg" width="1920" heigh
     <g stroke="${fg_dark}" stroke-width="2" stroke-linecap="round" fill="none">
       <path d="M210 175 l-8 -7 8 -7 M240 175 l8 -7 -8 -7"/>
     </g>
-    <rect x="280" y="155" width="600" height="30" rx="4" fill="${bg}" stroke="${bg_hl}"/>
+    <rect x="280" y="155" width="600" height="30" rx="4" fill="${bg}"/>
     <text x="296" y="175" font-size="14" fill="${fg_dark}">Pessoal  ›  Projetos  ›  arkmos-night-kde</text>
-    <rect x="1080" y="155" width="180" height="30" rx="4" fill="${bg}" stroke="${bg_hl}"/>
+    <rect x="1080" y="155" width="180" height="30" rx="4" fill="${bg}"/>
     <text x="1096" y="175" font-size="14" fill="${comment}">Pesquisar…</text>
 
     <!-- lateral -->
@@ -301,7 +307,7 @@ PREVIEW = Template("""<svg xmlns="http://www.w3.org/2000/svg" width="1920" heigh
     <rect x="1010" y="400" width="760" height="480" rx="8" fill="${bg}"/>
   </g>
   <g clip-path="url(#w2)">
-    <rect x="1010" y="400" width="760" height="38" fill="${bg_dark}"/>
+    <rect x="1010" y="400" width="760" height="38" fill="${bg}"/>
     <text x="1390" y="425" font-size="15" fill="${fg}" text-anchor="middle">Konsole</text>
     <g stroke="${fg}" stroke-width="2" stroke-linecap="round" fill="none">
       <path d="M1670 419 h12"/>
@@ -322,7 +328,7 @@ PREVIEW = Template("""<svg xmlns="http://www.w3.org/2000/svg" width="1920" heigh
 
   <!-- painel flutuante -->
   <g filter="url(#shadow)">
-    <rect x="610" y="1004" width="700" height="52" rx="10" fill="${bg_dark}" stroke="${bg_hl}"/>
+    <rect x="610" y="1004" width="700" height="52" rx="10" fill="${bg}" stroke="${bg_hl}"/>
   </g>
   <rect x="626" y="1014" width="32" height="32" rx="8" fill="${blue}"/>
   <path d="M634 1038 l8 -16 8 16 M637 1032 h10" stroke="${bg_dark}" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>

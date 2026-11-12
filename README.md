@@ -10,7 +10,7 @@ Tema global escuro para o KDE Plasma 6, com a paleta do [Tokyo Night](https://gi
 
 | Parte | O que é |
 |---|---|
-| Esquema de cores | `Arkmos Night`: janelas `#1a1b26`, listas e barras `#16161e`, texto `#c0caf5`, seleção azul `#7aa2f7` |
+| Esquema de cores | `Arkmos Night`: janelas e barras `#1a1b26`, listas `#16161e`, texto `#c0caf5`, seleção azul `#7aa2f7`, sem linhas entre os painéis |
 | Estilo do Plasma | `Arkmos Night`: painel, popups e widgets com as cores do tema |
 | Tema global | Junta tudo e também define o cursor e a tela de abertura |
 | Tela de abertura | O nome sobre o fundo do Tokyo Night, com uma barra de progresso |
@@ -75,14 +75,14 @@ O script gera o esquema de cores, as cores do Plasma, o esquema do Konsole e as 
 
 ### Linhas entre os painéis
 
-As bordas e os separadores das janelas (entre a lateral e a lista do Dolphin, por exemplo) não têm cor própria no esquema: o Breeze mistura um pouco da cor do texto no fundo. A proporção fica em `FRAME_CONTRAST`, no `tools/build.py`. O tema usa `0.1`, metade do padrão do KDE, para as linhas ficarem discretas. Use `0.2` para o padrão ou um valor maior para linhas mais marcadas. Apps que já estavam abertos podem precisar ser reabertos para mostrar a mudança.
+As bordas e os separadores das janelas (entre a lateral e a lista do Dolphin, por exemplo) não têm cor própria no esquema: o Breeze mistura um pouco da cor do texto no fundo. A proporção fica em `FRAME_CONTRAST`, no `tools/build.py`. O tema usa `0`: as linhas somem e as áreas se separam só pelos dois tons de fundo. Os campos de texto também perdem a borda e ficam marcados pelo fundo mais escuro. Use `0.1` para linhas discretas, `0.2` para o padrão do KDE ou um valor maior para linhas mais marcadas. Apps que já estavam abertos podem precisar ser reabertos para mostrar a mudança.
 
 ## Paleta
 
 | Uso | Cor |
 |---|---|
-| Fundo das janelas | `#1a1b26` |
-| Listas, barras de título, painel | `#16161e` |
+| Fundo das janelas, barras de título e de ferramentas, painel | `#1a1b26` |
+| Listas, campos de texto | `#16161e` |
 | Botões | `#292e42` |
 | Texto | `#c0caf5` |
 | Texto apagado | `#737aa2` |
